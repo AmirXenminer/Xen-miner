@@ -64,4 +64,191 @@ header{text-align:center;padding:12px}
 .coin{
  width:210px;
  height:210px;
- margin:35
+ margin:35px auto 25px;
+ border-radius:50%;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ cursor:pointer;
+ background:radial-gradient(circle,#173d68,#071426 70%);
+ border:4px solid #278fff;
+ box-shadow:
+ 0 0 15px #168cff,
+ 0 0 40px #087cff66,
+ inset 0 0 30px #168cff66;
+ transition:.2s;
+}
+
+.coin:active{transform:scale(.92)}
+
+.coin-inner{
+ width:174px;
+ height:174px;
+ border-radius:50%;
+ border:3px solid #65bdff;
+ background:linear-gradient(145deg,#123d69,#071323);
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex-direction:column;
+ box-shadow:inset 0 0 25px #168cff88;
+}
+
+.crown{
+ color:#8ccfff;
+ font-size:27px;
+ margin-bottom:3px;
+}
+
+.x-symbol{
+ font-size:75px;
+ font-weight:900;
+ color:#d5efff;
+ text-shadow:0 0 12px #168cff,0 0 25px #168cff;
+ line-height:1;
+}
+
+.coin-name{
+ color:#54b5ff;
+ font-size:12px;
+ font-weight:bold;
+ letter-spacing:4px;
+ margin-top:8px;
+}
+
+button{
+ cursor:pointer;
+ border:0;
+ border-radius:14px;
+ min-height:52px;
+ font-size:14px;
+ font-weight:bold;
+}
+
+.mine{
+ width:100%;
+ background:linear-gradient(90deg,#087cff,#38baff);
+ color:white;
+ box-shadow:0 0 20px #168cff66;
+}
+
+.level{
+ text-align:center;
+ color:#9bb9d5;
+ margin:22px;
+}
+
+.grid{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+ margin-top:28px;
+}
+
+.item{
+ background:linear-gradient(145deg,#12243b,#0a1423);
+ color:white;
+ border:1px solid #20578a;
+ box-shadow:0 0 10px #087cff18;
+}
+
+.item:active,.mine:active{transform:scale(.97)}
+
+.status{
+ text-align:center;
+ color:#39aaff;
+ font-size:12px;
+ margin:24px 0;
+}
+
+footer{
+ text-align:center;
+ color:#587da2;
+ font-size:10px;
+ margin-top:30px;
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<header>
+ <div class="logo">⛏ XEN MINER</div>
+ <div class="tag">THE FUTURE OF DIGITAL MINING</div>
+</header>
+
+<div class="card">
+ <div class="label">TOTAL XEN BALANCE</div>
+ <div class="amount" id="balance">0.00 XEN</div>
+</div>
+
+<div class="coin" id="coin">
+ <div class="coin-inner">
+  <div class="crown">♛</div>
+  <div class="x-symbol">X</div>
+  <div class="coin-name">XEN</div>
+ </div>
+</div>
+
+<button class="mine" id="mine">
+ COLLECT TEST POINTS
+</button>
+
+<div class="level">
+ MINER LEVEL : <b id="level">01</b>
+</div>
+
+<div class="grid">
+ <button class="item" onclick="page('tasks')">🎯 مأموریت‌ها</button>
+ <button class="item" onclick="page('upgrade')">⚡ ارتقای ماینر</button>
+ <button class="item" onclick="page('friends')">👥 دعوت دوستان</button>
+ <button class="item" onclick="page('ranking')">🏆 رتبه‌بندی</button>
+ <button class="item" onclick="page('history')">📊 تاریخچه</button>
+ <button class="item" onclick="page('withdraw')">💳 برداشت آزمایشی</button>
+</div>
+
+<div class="status" id="status">● SYSTEM ONLINE</div>
+
+<footer>XEN MINER © 2026</footer>
+
+</div>
+
+<script>
+const tg=window.Telegram?.WebApp;
+
+if(tg){
+ tg.ready();
+ tg.expand();
+}
+
+let balance=0;
+
+function collect(){
+ balance++;
+ document.getElementById("balance").textContent=
+ balance.toFixed(2)+" XEN";
+
+ document.getElementById("status").textContent=
+ "+1 TEST XEN COLLECTED";
+}
+
+document.getElementById("mine").addEventListener("click",collect);
+document.getElementById("coin").addEventListener("click",collect);
+
+function page(name){
+ const messages={
+ tasks:"🎯 مأموریت‌ها به‌زودی فعال می‌شوند",
+ upgrade:"⚡ ارتقای ماینر به‌زودی فعال می‌شود",
+ friends:"👥 دعوت دوستان به‌زودی فعال می‌شود",
+ ranking:"🏆 جدول رتبه‌بندی به‌زودی فعال می‌شود",
+ history:"📊 تاریخچه فعالیت شما",
+ withdraw:"💳 برداشت آزمایشی غیرفعال است"
+ };
+
+ document.getElementById("status").textContent=messages[name];
+}
+</script>
+
+</body>
+</html>
