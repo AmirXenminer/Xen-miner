@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>XEN MINER</title>
+
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+<style>
+* {
+ box-sizing: border-box;
+}
+
+body {
+ margin: 0;
+ background: #070b12;
+ color: white;
+ font-family: Tahoma, sans-serif;
+}
+
+.app {
+ max-width: 450px;
+ margin: auto;
+ padding: 22px 18px;
+}
+
+header {
+ text-align: center;
+ padding: 12px;
+}
+
+.logo {
+ font-size: 30px;
+ font-weight: 900;
+ color: #54f5e8;
+ letter-spacing: 3px;
+}
+
+.tag {
+ font-size: 10px;
+ color: #849da8;
+ margin-top: 8px;
+ letter-spacing: 2px;
+}
+
+.card {
+ background: linear-gradient(145deg,#14232d,#0b131c);
+ border: 1px solid #24505a;
+ border-radius: 20px;
+ padding: 20px;
+ margin-top: 24px;
+ text-align: center;
+}
+
+.label {
+ font-size: 12px;
+ color: #9db5bd;
+}
+
+.amount {
+ font-size: 38px;
+ color: #54f5e8;
+ font-weight: bold;
+ margin-top: 12px;
+}
+
+.coin {
+ width: 205px;
+ height: 205px;
+ border-radius: 50%;
+ margin: 32px auto 22px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ background: radial-gradient(circle,#2b7776 0%,#12343c 48%,#08121b 72%);
+ border: 3px solid #54f5e8;
+ box-shadow: 0 0 25px #26dccc55,inset 0 0 30px #26dccc44;
+ font-size: 76px;
+}
+
+button {
+ cursor: pointer;
+ border: 0;
+ border-radius: 14px;
+ min-height: 52px;
+ font-size: 14px;
+ font-weight: bold;
+}
+
+.mine {
+ width: 100%;
+ background: #54f5e8;
+ color: #061116;
+}
+
+.level {
+ text-align: center;
+ color: #9db5bd;
+ margin: 20px;
+}
+
+.grid {
+ display: grid;
+ grid-template-columns: 1fr 1fr;
+ gap: 12px;
+ margin-top: 28px;
+}
+
+.item {
+ background: #111e29;
+ color: white;
+ border: 1px solid #24434e;
+}
+
+.item:active,.mine:active {
+ transform: scale(.97);
+}
+
+.status {
+ text-align: center;
+ color: #54f5e8;
+ font-size: 12px;
+ margin: 24px 0;
+}
+
+footer {
+ text-align: center;
+ color: #58717b;
+ font-size: 10px;
+ margin-top: 30px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header>
+ <div class="logo">⛏ XEN MINER</div>
+ <div class="tag">THE FUTURE OF DIGITAL MINING</div>
+</header>
+
+<div class="card">
+ <div class="label">TOTAL XEN BALANCE</div>
+ <div class="amount" id="balance">0.00 XEN</div>
+</div>
+
+<div class="coin" id="coin">⚡</div>
+
+<button class="mine" id="mine">
+ ⚡ COLLECT TEST POINTS
+</button>
+
+<div class="level">
+ MINER LEVEL : <b id="level">01</b>
+</div>
+
+<div class="grid">
+ <button class="item" onclick="page('tasks')">🎯 مأموریت‌ها</button>
+ <button class="item" onclick="page('upgrade')">⚡ ارتقای ماینر</button>
+ <button class="item" onclick="page('friends')">👥 دعوت دوستان</button>
+ <button class="item" onclick="page('ranking')">🏆 رتبه‌بندی</button>
+ <button class="item" onclick="page('history')">📊 تاریخچه</button>
+ <button class="item" onclick="page('withdraw')">💳 برداشت آزمایشی</button>
+</div>
+
+<div class="status" id="status">● SYSTEM ONLINE</div>
+
+<footer>XEN MINER © 2026</footer>
+
+</div>
+
+<script>
+const tg = window.Telegram?.WebApp;
+
+if(tg) {
+ tg.ready();
+ tg.expand();
+}
+
+let balance = 0;
+
+function collect() {
+ balance++;
+ document.getElementById("balance").textContent =
+ balance.toFixed(2) + " XEN";
+
+ document.getElementById("status").textContent =
+ "+1 TEST XEN COLLECTED";
+}
+
+document.getElementById("mine").addEventListener("click",collect);
+document.getElementById("coin").addEventListener("click",collect);
+
+function page(name) {
+ const messages = {
+ tasks:"🎯 مأموریت‌ها به‌زودی فعال می‌شوند",
+ upgrade:"⚡ ارتقای ماینر به‌زودی فعال می‌شود",
+ friends:"👥 دعوت دوستان به‌زودی فعال می‌شود",
+ ranking:"🏆 جدول رتبه‌بندی به‌زودی فعال می‌شود",
+ history:"📊 تاریخچه فعالیت شما",
+ withdraw:"💳 برداشت آزمایشی فعلاً غیرفعال است"
+ };
+
+ document.getElementById("status").textContent = messages[name];
+}
+</script>
+
+</body>
+</html>
